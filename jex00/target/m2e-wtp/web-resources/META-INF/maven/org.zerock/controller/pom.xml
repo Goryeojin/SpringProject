@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.zerock</groupId>
 	<artifactId>controller</artifactId>
-	<name>ex00</name>
+	<name>jex00</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -152,6 +152,15 @@
                 <configuration>
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
+            </plugin>
+            <!-- web.xml 사용하지 않고 java로 설정 파일 작성하기 위해 추가 -->
+            <plugin>
+            	<groupId>org.apache.maven.plugins</groupId>
+            	<artifactId>maven-war-plugin</artifactId>
+            	<version>3.2.0</version>
+            	<configuration>
+            		<failOnMissingWebXml>false</failOnMissingWebXml>
+            	</configuration>
             </plugin>
         </plugins>
     </build>
