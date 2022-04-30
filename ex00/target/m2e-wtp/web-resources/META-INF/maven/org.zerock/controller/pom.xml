@@ -223,7 +223,7 @@
                     <downloadJavadocs>true</downloadJavadocs>
                 </configuration>
             </plugin>
-            <!-- 자바 버전 변경 -->
+            <!-- Maven의 컴파일 옵션 1.6 => 1.8 자바 버전 변경 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
