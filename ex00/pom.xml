@@ -13,6 +13,18 @@
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
+	
+	<!-- 
+		- repositories : 기본저장소에서 dependency를 다운받지 못하는 경우
+						직접 다운받고자 하는 사설 저장소를 등록
+	-->
+ 	<repositories>
+		<repository>
+	 		<id>Datanucleus</id>
+	 		<url>http://www.datanucleus.org/downloads/maven2/</url>
+	 	</repository>
+ 	</repositories>
+ 	
 	<dependencies>
 		<!-- Spring -->
 		<dependency>
@@ -61,7 +73,7 @@
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
+			<version>1.2.17</version>
 			<exclusions>
 				<exclusion>
 					<groupId>javax.mail</groupId>
@@ -93,8 +105,10 @@
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
+			<!-- servlet-api => javax.servlet-api -->
+			<artifactId>javax.servlet-api</artifactId>
+			<!-- 2.5 => 3.1.0 -->
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -113,9 +127,85 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<!-- 4.7 => 4.12 -->
+			<version>4.12</version>
 			<scope>test</scope>
-		</dependency>        
+		</dependency> 
+		
+		<!--  spring-test 라이브러리 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		<!-- Lombok 라이브러리 -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.12</version>
+		    <scope>provided</scope>
+		</dependency>       
+		<!--  log4j 라이브러리는 1.2.15로 설정되어 있음. 1.2.17 버전을 추가하고 기존은 삭제하거나 주석처리한다. -->
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		
+		<!-- 1. DB관련(오라클, 마이바티스) 라이브러리들 -->
+		<!-- ojdbc6 라이브러리 -->
+		<dependency>
+		    <groupId>oracle</groupId>
+		    <artifactId>ojdbc6</artifactId>
+		    <version>11.2.0.3</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+		<!-- 커넥션 풀 설정 -->
+		<dependency>
+		    <groupId>com.zaxxer</groupId>
+		    <artifactId>HikariCP</artifactId>
+		    <version>2.7.4</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+		<!-- 순수 MyBatis -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis</artifactId>
+		    <version>3.4.6</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+		<!-- 스프링에서 MyBatis를 이용하기 위한 라이브러리 -->
+		<dependency>
+		    <groupId>org.mybatis</groupId>
+		    <artifactId>mybatis-spring</artifactId>
+		    <version>1.3.2</version>
+		</dependency>
+		
+		<!-- 스프링에서 JDBC 기능(데이터베이스 처리와 트랜잭션 처리)을 사용하기 위한 라이브러리 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-tx</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4 -->
+		<!-- log4jdbc-log4j2 -->
+		<!-- SQL을 변환해 PreparedStatement에 사용된 '?'가 어떤 값으로 처리되어 있는지 확인하는 기능 -->
+		<dependency>
+		    <groupId>org.bgee.log4jdbc-log4j2</groupId>
+		    <artifactId>log4jdbc-log4j2-jdbc4</artifactId>
+		    <version>1.16</version>
+		</dependency>
+		
+		
 	</dependencies>
     <build>
         <plugins>
@@ -133,6 +223,7 @@
                     <downloadJavadocs>true</downloadJavadocs>
                 </configuration>
             </plugin>
+            <!-- 자바 버전 변경 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
