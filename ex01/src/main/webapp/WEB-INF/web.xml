@@ -16,12 +16,18 @@
 	</listener>
 
 	<!-- Processes application requests -->
+	<!-- DispatcherServlet이 구동될 때 servlet-context.xml 파일을 읽겠다. -->
 	<servlet>
 		<servlet-name>appServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
+		</init-param>
+		<!-- DispatcherServlet을 이용해 404에러도 같이 처리 -->
+		<init-param>
+			<param-name>throwExceptionIfNoHandlerFound</param-name>
+			<param-value>true</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
