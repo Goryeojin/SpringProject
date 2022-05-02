@@ -37,13 +37,32 @@
                 <div class="form-group">
                     <label>Writer</label> <input class="form-control" name="writer" value='<c:out value="${board.writer}"/>' readonly>
                 </div>
-                <button data-oper='modify' 
-                    class="btn btn-default"
-                    onClick="location.href='/board/modify?bno=<c:out value="${board.bno}"/>'">Modify</button>
-                <button data-oper='list' 
-                	class="btn btn-info"
-                	onClick="location.href='/board/list'">List</button>
+                <button data-oper='modify' class="btn btn-default">Modify</button>
+                <button data-oper='list' class="btn btn-info">List</button>
 
+                <form id="operForm" action="/board/modify" method="get">
+                    <input type="hidden" id="bno" name="bno" value='<c:out value="${board.bno}"/>'>
+                </form>
+
+                <script type="text/javascript">
+                    $(document).ready(function(){
+
+                        var operForm = $("#operForm");
+
+                        $("button[data-oper='modify']").on('click', function(e){
+
+                            operForm.attr("action", "/board/modify").submit();
+                        });
+
+                        $("button[data-oper='list']").on('click', function(e){
+
+                            // 불필요한 bno 값 제거(input 태그 제거로)
+                            operForm.find("#bno").remove();
+                            operForm.attr("action", "/board/list");
+                            operForm.submit();
+                        });
+                    });
+                </script>
             </div>
             <!-- end panel-body -->
         </div>
