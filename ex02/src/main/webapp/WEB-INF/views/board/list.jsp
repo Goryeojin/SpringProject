@@ -35,7 +35,7 @@
                                 <c:forEach items="${list}" var="board">
                                     <tr>
                                         <td><c:out value="${board.bno }" /></td>
-                                        <td><c:out value="${board.title }"/></td>
+                                        <td><a href="/board/get?bno=<c:out value="${board.bno}"/>"><c:out value="${board.title }"/></a></td>
                                         <td><c:out value="${board.writer}" /></td>
                                         <td><fmt:formatDate pattern="yyyy-MM-dd" value="${board.regdate }"/></td>
                                         <td><fnt:formatDate pattern="yyyy-MM-dd" value="${board.updateDate }"/></td>
@@ -76,9 +76,13 @@
                 var result = '<c:out value="${result}"/>';
 
                 checkModal(result);
+
+                // window의 history 객체를 이용해 뒤로 가기, 앞으로 가기 실행시 모달창 중복 실행 방지
+                // 스택 구조로 동작함.
+                history.replaceState({}, null, null);
                 
                 function checkModal(result){
-                    if(result === ''){
+                    if(result === '' || history.state){
                         return;
                     }
                     
