@@ -24,8 +24,13 @@ public class BoardController {
 	@GetMapping("/list")
 	public void list(Model model) {
 		
-		log.info("list");
+		log.info("list" + model);
 		model.addAttribute("list", service.getList());
+		
+	}
+	
+	@GetMapping("/register")
+	public void register() {
 		
 	}
 	
