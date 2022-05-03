@@ -41,7 +41,9 @@ public class BoardControllerTests {
 	public void testList() throws Exception {
 		
 		log.info(
-			mockMvc.perform(MockMvcRequestBuilders.get("/board/list")) // GET 방식 호출
+			mockMvc.perform(MockMvcRequestBuilders.get("/board/list")
+			.param("pageNum", "2")
+			.param("amount", "50"))
 			.andReturn()
 			.getModelAndView()
 			.getModelMap());
@@ -91,6 +93,7 @@ public class BoardControllerTests {
 	*/
 	
 	// 삭제 테스트
+	/*
 	@Test
 	public void testRemove() throws Exception{
 		
@@ -100,5 +103,6 @@ public class BoardControllerTests {
 		
 		log.info(resultPage);
 	}
+	*/
 
 }
