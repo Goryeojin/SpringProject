@@ -1,5 +1,8 @@
 package org.zerock.controller;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +41,10 @@ public class BoardController {
 		log.info("list : " + cri);
 		model.addAttribute("list", service.getList(cri));
 //		model.addAttribute("pageMaker", new PageDTO(cri, 123));
+		
+		List<BoardVO> list = service.getList(cri);
+		
+		list.forEach(board -> log.info(board));
 		
 		int total = service.getTotal(cri);
 		
